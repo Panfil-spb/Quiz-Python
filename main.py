@@ -29,10 +29,10 @@ def block(file):
     answers = []
     for i in range(4):
         answers.append(readNextLine(file))
-        correct = readNextLine(file)
-        if correct:
-            correct = correct[0]
-            explanation = readNextLine(file)
+    correct = readNextLine(file)
+    if correct:
+        correct = correct[0]
+    explanation = readNextLine(file)
     return category, question, answers, correct, explanation
 
 
@@ -48,9 +48,9 @@ def main():
         print(category)
         print(question)
         for i in range(len(answers)):
-            print("\t" + str(i) + ". - " + answers[i])
+            print("\t" + str(i + 1) + ". - " + answers[i])
         userAns = input("Ваш ответ >>> ")
-        if userAns == correct:
+        if str(userAns) == str(correct):
             print("Да!")
             score += 1
         else:
