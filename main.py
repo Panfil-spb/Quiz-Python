@@ -18,15 +18,49 @@ def openFile():
 def welcom():
     print("\t\t\tДобро пожаловать в игру викторину!")
 
+def readNextLine(file):
+    line = file.readline()
+    line = line.replace('/', '\n')
+    return line
 
 def block(file):
+    category = readNextLine(file)
+    question = readNextLine(file)
+    answers = []
+    for i in range(4):
+        answers.append(readNextLine(file))
+        correct = readNextLine(file)
+        if correct:
+            correct = correct[0]
+            explanation = readNextLine(file)
+    return category, question, answers, correct, explanation
+
 
 
 
 def main():
     welcom()
+    score = 0
     file = openFile()
+    category, question, answers, correct, explanation = block(file)
 
+    while category:
+        print(category)
+        print(question)
+        for i in range(len(answers)):
+            print("\t" + str(i) + ". - " + answers[i])
+        userAns = input("Ваш ответ >>> ")
+        if userAns == correct:
+            print("Да!")
+            score += 1
+        else:
+            print("Нет!")
+        print(explanation)
+        print("Ваш счет " + str(score))
+        category, question, answers, correct, explanation = block(file)
+    file.close()
+    print("Игра окончена! Вы набрали " + str(score))
+    next()
 
 
 main()
